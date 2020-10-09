@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,11 +27,31 @@
       <li><a href="#">Page 1-2</a></li>
       <li><a href="#">Page 1-3</a></li>
     </ul>
+   
+    
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
 </nav>
+
+ <table  class="table table-striped">
+    	<tr> 
+    		<td>NUM</td> <td>TITLE</td> <td>WRITER</td> <td>CONTENTS</td> <td>REGDATE</td> <td>HIT</td>
+    			
+    	</tr>
+    	
+    	<c:forEach items="${list}" var="dto">  	
+    		<tr>
+    			<td>${dto.num}</td>
+    			<td>${dto.title}</td>
+    			<td>${dto.writer}</td>
+    			<td>${dto.contents}</td>
+    			<td>${dto.regdate}</td>
+    			<td>${dto.hit}</td>
+    		</tr>
+    	</c:forEach>
+    </table>
 </body>
 </html>
