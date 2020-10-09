@@ -31,6 +31,7 @@
         </ul>
       </li>
       <li><a href="./board/boardList.board">Board</a></li>
+      
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

@@ -12,7 +12,17 @@ public class BoardService {
 	public BoardService() {
 		boardDAO=new BoardDAO();
 	}
+	//게시글 작성
+	public void boardInsert(BoardDTO boardDTO)throws Exception {
+		 int result = boardDAO.boardInsert(boardDTO);
+		 if(result>0) {
+			 System.out.println("Insert 성공");
+		 }else {
+			 System.out.println("Insert 실패");
+		 }
+	}
 	
+	//전체게시글 출력
 	public List<BoardDTO> boardList() throws Exception {
 		List<BoardDTO> boardDTOs = boardDAO.boardList();
 		return boardDTOs;

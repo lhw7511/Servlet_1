@@ -50,6 +50,10 @@ public class BoardController extends HttpServlet {
 			}
 			request.setAttribute("list", boardDTOs);
 			break;
+		case "boardWrite.board":
+				info="./boardWrite.jsp";
+			break;
+			
 		}
 		
 		
@@ -61,7 +65,35 @@ public class BoardController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		String path=request.getRequestURL().toString();
+		path=path.substring(path.lastIndexOf("/")+1);
+		String info="";
+		BoardDTO boardDTO =null;
+		List<BoardDTO> boardDTOs = null;
+		switch(path) {
+		case "boardList.board":
+				info="./boardList.jsp";
+
+			try {
+				boardDTO =new BoardDTO();
+				boardDTO.setTitle(request.getParameter("title"));
+				boardDTO.setWriter(request.getParameter("writer"));
+				boardDTO.setContents(request.getParameter("contents"));
+				boardService.boardInsert(boardDTO);
+				boardDTOs=boardService.boardList();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("list", boardDTOs);
+			break;
+	
+			
+		}
+		RequestDispatcher view =request.getRequestDispatcher(info);
+		view.forward(request, response);
 	}
 
 }

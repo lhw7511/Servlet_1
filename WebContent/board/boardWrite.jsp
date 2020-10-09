@@ -35,7 +35,7 @@
 
 <div class="container">
   <h2>Board Write form</h2>
-  <form action="#">
+  <form action="./boardList.board"method="post">
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title">

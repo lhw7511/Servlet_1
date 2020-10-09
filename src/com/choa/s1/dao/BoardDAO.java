@@ -19,7 +19,23 @@ public class BoardDAO {
 	public BoardDAO() {
 		connector=new DBConnector();
 	}
+	public int boardInsert(BoardDTO boardDTO) throws Exception{
+		con=connector.getConnect();
+		int result=0;
+		String sql="INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL,?,?,?,SYSDATE,0)";
+		st=con.prepareStatement(sql);
+		st.setString(1, boardDTO.getTitle());
+		st.setString(2, boardDTO.getWriter());
+		st.setString(3, boardDTO.getContents());
+		
+		
+		result=st.executeUpdate();
+		st.close();
+		con.close();
+		return result;
+	}
 	
+	//전체 게시글 출력
 	public List<BoardDTO> boardList() throws Exception {
 		List<BoardDTO> boardDTOs = new ArrayList<>();
 		con=connector.getConnect();
