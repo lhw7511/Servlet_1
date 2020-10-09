@@ -39,6 +39,7 @@ public class BoardController extends HttpServlet {
 		List<BoardDTO> boardDTOs = null;
 		String info="";
 		switch(path) {
+		//index.jsp에서 boardList a태그를 눌렀을 경우
 		case "boardList.board":
 				info="./boardList.jsp";
 			try {
@@ -48,8 +49,10 @@ public class BoardController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//boardList.jsp에서 db에서가져온 게시글리스트를 뿌려주기위해 set함.
 			request.setAttribute("list", boardDTOs);
 			break;
+			//boardList페이지에서 write버튼을눌러서 작성페이지로 가는경우
 		case "boardWrite.board":
 				info="./boardWrite.jsp";
 			break;
@@ -73,15 +76,19 @@ public class BoardController extends HttpServlet {
 		BoardDTO boardDTO =null;
 		List<BoardDTO> boardDTOs = null;
 		switch(path) {
+		//write페이지에서 게시글을 작성하고 write버튼을 눌렀을땐 post형식으로 디비에 게시글insert후 boardlist페이지로이동함
 		case "boardList.board":
 				info="./boardList.jsp";
 
 			try {
+				//insert작성
 				boardDTO =new BoardDTO();
 				boardDTO.setTitle(request.getParameter("title"));
 				boardDTO.setWriter(request.getParameter("writer"));
 				boardDTO.setContents(request.getParameter("contents"));
 				boardService.boardInsert(boardDTO);
+				
+			   //db에 인서트후 list화면으로 넘어가기위해 get방식과 같이 db에서 게시글리스트를 가져옴
 				boardDTOs=boardService.boardList();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
